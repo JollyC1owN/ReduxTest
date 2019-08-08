@@ -7,8 +7,7 @@ export default class Counter extends Component {
   static propTypes = {
     count: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired,
-    incrementAsync: PropTypes.func.isRequired,
+    decrement:PropTypes.func.isRequired,
   }
 
   increment = () => {
@@ -39,14 +38,12 @@ export default class Counter extends Component {
 
   incrementAsync = () => {
     //得到选择增加的数据:是一个字符串
-    const number = this.select.value * 1  
-    
-    this.props.incrementAsync(number)
+    const number = this.select.value * 1    
     //启动延时定时器
-    // setTimeout(() => {
-    //   //调用store的方法更新状态
-    //   this.props.increment(number)
-    // }, 1000);
+    setTimeout(() => {
+      //调用store的方法更新状态
+      this.props.increment(number)
+    }, 1000);
   }
   render() {
     let {count }  = this.props

@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from "react-redux"
 
 
-import { increment, decrement, incrementAsync} from "../redux/actions"
+import { increment, decrement } from "../redux/actions"
 import Counter from "../components/Counter"
 
 
@@ -18,7 +18,7 @@ export default connect(
 	state => ({ count: state }), //该箭头函数返回值是一个对象 {count: 数字} count  与App组件内的限制属性类型的名字一直
 	//{ increment: increment, decrement: decrement} //传的是两个方法 函数
 	//increment后面的属性值是由import {increment,decrement } from "./redux/actions"这里来的 
-	{ increment, decrement, incrementAsync }  //简写
+	{ increment, decrement }  //简写
 )(Counter)
 // count increment, decrement 与App组件内的限制属性类型的名字一直
 //这两个对象中的所有数据，最终会结构赋值交给App组件。做为他的属性传递，
