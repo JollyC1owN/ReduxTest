@@ -15,7 +15,7 @@ import Counter from "../components/Counter"
 //connect()函数执行后返回的是一个函数，这个函数执行的时候需要接受一个组件类，
 //connect()(App)  这个返回的是一个新的组件
 export default connect(
-	state => ({ count: state }), //该箭头函数返回值是一个对象 {count: 数字} count  与App组件内的限制属性类型的名字一直
+	state => ({ count: state }), //该箭头函数返回值是一个对象 {count: 数字} count与App组件内的使用的名字一致
 	//{ increment: increment, decrement: decrement} //传的是两个方法 函数
 	//increment后面的属性值是由import {increment,decrement } from "./redux/actions"这里来的 
 	{ increment, decrement, incrementAsync }  //简写

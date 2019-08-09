@@ -1,49 +1,24 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { connect} from "react-redux"
-
-import { addComment ,delComment, getComments} from "../redux/actions"
-import Add from "../components/add/Add"
-import List from "../components/list/List"
-
-class App extends Component {
-
-  static propTypes = {
-    comments: PropTypes.array.isRequired,
-    addComment: PropTypes.func.isRequired,
-    delComment: PropTypes.func.isRequired,
-    getComments: PropTypes.func.isRequired,
-  }
-
-  componentDidMount() {
-    //一开始就获取数组里面原有的数据
-    this.props.getComments()
-  }
-
-  render() {
-    let { comments, addComment, delComment } = this.props
-    return (
-      <div>
-        <header className="site-header jumbotron">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12">
-                <h1>请发表对React的评论</h1>
-              </div>
-            </div>
-          </div>
-        </header>
-        <div className="container">
-          <Add addComment={addComment} />
-          <List comments={comments} delComment={delComment} />
-        </div>
-      </div>
-    )
-  }
-}
+/* 这是一个容器组件，使用了redux的API 
+	容器组件内会包含一个UI组件----Counter，会对这个UI组建进项包装
+	connect用于包装UI组件生成容器组件
+*/
+import React from 'react';
+//链接react组件与redux的，是他们关联起来 connect是一个函数
+import { connect } from "react-redux"
 
 
+import { increment, decrement, incrementAsync} from "../redux/actions"
+import Counter from "../components/Counter"
+
+
+
+//connect()函数执行后返回的是一个函数，这个函数执行的时候需要接受一个组件类，
+//connect()(App)  这个返回的是一个新的组件
 export default connect(
-  state => ({ comments: state }), //state就是一个comments数组
-  { addComment, delComment, getComments}
-)(App)
+	state => ({ count: state }), //该箭头函数返回值是一个对象 {count: 数字} count与App组件内的使用的名字一致
+	//{ increment: increment, decrement: decrement} //传的是两个方法 函数
+	//increment后面的属性值是由import {increment,decrement } from "./redux/actions"这里来的 
+	{ increment, decrement, incrementAsync }  //简写
+)(Counter)
+// count increment, decrement 与App组件内的限制属性类型的名字一直
+//这两个对象中的所有数据，最终会结构赋值交给App组件。做为他的属性传递，

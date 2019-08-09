@@ -1,28 +1,28 @@
-import { ADD_COMMENT, DEL_COMMENT,RECEIVE_COMMENTS } from "./action-types";
+/* 包含所有的action creator 
+		创建action 的函数
 
-/* 包含了所有的action  creator（action的工厂函数） */
+		同步action 返回的都是一个对象
+		异步action 返回的都是一个函数
+*/
+import { INCREMENT, DECREMENT } from "./action-types"
+//增加 
+export const increment = (number) => ({ type: INCREMENT, data: number })
+
+//减少
+export const decrement = (number) => ({ type: DECREMENT, data: number })
 
 
-//同步添加
-export const addComment = (obj) => ({ type: ADD_COMMENT, data: obj })
-//同步删除
-export const delComment = (userId) => ({ type: DEL_COMMENT, data: userId })
-
-//同步接受comments
-const receiveComments = (comments) => ({ type: RECEIVE_COMMENTS, data: comments})
-
-//异步从后台获取数据
-export const getComments = () => {
-	return dispatch => {
-		//模拟发送ajax请求异步获取数据
+//异步action  ---必须在store中使用中间件才能这么写
+//每一个异步的action最好提供一个同步的action
+export const incrementAsync = (number) => { 
+	//返回的这个函数是由异步中间件（thunk），来调用
+	return dise => { 
+		//异步代码 ---在函数中才能执行异步代码
 		setTimeout(() => {
-			const comments = [
-				{ userId: "001", userName: "tomb", userContent: "reactGoGoGO" },
-				{ userId: "002", userName: "jolly", userContent: "react666666" },
-				{ userId: "003", userName: "clown", userContent: "react难难难" },
-			]
-			//分发一个同步的action
-			dispatch(receiveComments(comments))
-		}, 3000);
+			//1s之后才去分发一个增加的 action
+			dise(increment(number))
+    }, 3000);
 	}
 }
+
+
