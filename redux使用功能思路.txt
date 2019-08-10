@@ -1,0 +1,18 @@
+1. 分析业务逻辑
+	1. 要托管什么数据
+	2. 怎么修改数据（方向）
+2. 使用redux
+	1. 创建store对象
+	2. 创建reducer
+		1. 关注的是它的行为
+		2. reducer： 返回状态值给store对象
+		3. 初始化给store对象状态值
+		4. 分发action的时候，根据action的type类型以及aciton.data决定如何修改状态，并将修改后状态值交给store对象
+		5. 如何去匹配action.type: switch，case
+	3. 设计action	
+		1. 本质：{type: 行为，data: 数据}
+		2. 定义函数：为了能够动态的设置data数据
+	4. 组件和redux交互
+		1. 组件中一定要获取到store对象
+		2. 获取redux中的状态: store.getState()
+		3. 组件中分发action: store.dispatch(action对象)
